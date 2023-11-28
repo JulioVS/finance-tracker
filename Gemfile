@@ -76,3 +76,4 @@ group :production do
   gem "pg"
 end
 gem "devise", "~> 4.9"
+gem 'devise-bootstrap-views', '~> 1.0' 

@@ -21,10 +21,12 @@
     <!-- Add Navigation Bar by Boostrap -->
     <%= render 'layouts/navigation' %>
 
-    <!-- Add Flash Message functionality for Devise -->
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+    <div class="container">
+      <!-- Add Flash Message functionality for Devise -->
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
 
-    <%= yield %>
+      <%= yield %>
+    </div>
   </body>
 </html>
