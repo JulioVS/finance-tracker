@@ -22,10 +22,7 @@
     <%= render 'layouts/navigation' %>
 
     <div class="container">
-      <!-- Add Flash Message functionality for Devise -->
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
-
+      <%= render 'layouts/messages' %>
       <%= yield %>
     </div>
   </body>
