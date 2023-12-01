@@ -104,6 +104,8 @@ GEM
     faraday-multipart (1.0.4)
       multipart-post (~> 2)
     faraday-net_http (3.0.2)
+    font-awesome-rails (4.7.0.8)
+      railties (>= 3.2, < 8.0)
     globalid (1.2.1)
       activesupport (>= 6.1)
     hashie (5.0.0)
@@ -252,6 +254,7 @@ DEPENDENCIES
   debug
   devise (~> 4.9)
   devise-bootstrap-views (~> 1.0)
+  font-awesome-rails
   iex-ruby-client
   importmap-rails
   jbuilder

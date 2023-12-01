@@ -17,7 +17,28 @@ class Stock < ApplicationRecord
     )
 
     # Obtengo el precio actual de stock del simbolo (empresa) recibido.-
-    client.price(ticker_symbol)
+    # client.price(ticker_symbol)
+
+    # Creo una nueva instancia de la clase "Stock" para que el metodo ya devuelva un objeto
+    # armado con los datos necesarios (definidos previamente en el modelo y la db, que serian 
+    # "ticker", "nombre" y "precio")
+    #
+    # Para ello en vez de usar el metodo "price()" de la API de IEX, uso "quote()" que me
+    # trae todos los datos de una.-
+    #
+    quote = client.quote(ticker_symbol)
+
+    # Ahora creo el objeto de la clase Stock (es decir, en la que estamos aqui mismo, por eso 
+    # no hace falta hacer "Stock.new()" sino solo "new()") pasandole los datos que me devolvio
+    # la API de IEX
+    #
+    new(
+      ticker:       quote.symbol, 
+      name:         quote.company_name, 
+      last_price:   quote.latest_price
+    )
+
+    # debugger
   end
 
 end
