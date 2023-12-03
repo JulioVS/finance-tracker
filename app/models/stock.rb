@@ -1,4 +1,8 @@
 class Stock < ApplicationRecord
+  has_many :user_stocks
+  has_many :users, through: :user_stocks 
+
+  validates :name, :ticker, presence: true 
 
   def self.new_lookup(ticker_symbol) 
     # Recupero las credenciales de mi servicio IEX Cloud desde el YAML de credenciales
