@@ -1,4 +1,5 @@
 <h1>My Portfolio</h1>
+<h5><%= current_user.email %></h5>
 
 <div class="search-area">
   <h3>Search Stocks</h3>
@@ -20,3 +21,7 @@
 <div id="result">
 
 </div>
+
+<% if !@tracked_stocks.empty? %>
+  <%= render 'stocks/list' %>
+<% end %>
