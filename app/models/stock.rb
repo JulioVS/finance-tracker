@@ -51,4 +51,9 @@ class Stock < ApplicationRecord
     end
   end
 
+  # Metodo de clase para verificar si un Ticker ya existe en la DB de Stocks, o no
+  def self.check_db(ticker_symbol)
+    # Equivale a "Stock.where()" porque al estar justo aqui en la clase Stock, queda implícita
+    where(ticker: ticker_symbol).first
+  end
 end
