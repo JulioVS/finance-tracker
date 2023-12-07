@@ -12,7 +12,8 @@
             <%= link_to 'My Portfolio', my_portfolio_path, class: link_style %>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
+            <% link_style = (request.path == my_friends_path) ? 'nav-link active' : 'nav-link' %>
+            <%= link_to 'My Friends', my_friends_path, class: link_style %>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
