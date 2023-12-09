@@ -11,11 +11,10 @@ class UsersController < ApplicationController
     entry = params[:friend] 
    
     if entry.present?
-      @friend = User.find_by(first_name: entry)
-      @friend = User.find_by(last_name: entry) if !@friend 
-      @friend = User.find_by(email: entry) if !@friend 
-   
-      if !@friend
+      @friends = User.search(entry)
+      @friends.delete(current_user)  # avoids listing the logged user himself in the search results
+
+      if @friends.empty? 
         flash[:alert] = "Sorry, could not find the user"     
       end
     else

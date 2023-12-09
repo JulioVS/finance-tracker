@@ -4,14 +4,21 @@
   <%= render 'layouts/messages' %>
 </div>
 
-<% if @friend %>
+<% if !@friends.empty? %>
   <div class="card bg-light mb-3 card-body results-block">
+    <table class="col-md-12">
+      <tbody>
   
-    <strong>First Name: </strong> <%= @friend.first_name %>
-    <strong>Last Name: </strong> <%= @friend.last_name %>
-    <strong>e-Mail: </strong> <%= @friend.email %>
+        <% @friends.each do |friend| %>
+          <tr>
+            <td><strong>Name: </strong> <%= friend.full_name %></td>
+            <td><strong>Email: </strong> <%= friend.email %></td>
+            <td><strong>Actions: </strong> <%= link_to 'View Profile', '#', class: "btn btn-sm btn-success" %></td>
+            <td><%= link_to 'Follow', '#', class: "btn btn-sm btn-success", method: :post %></td>
+          </tr>
+        <% end %>
 
-    <%= link_to 'Follow friend?', '#', class: "btn btn-xs btn-success", method: :post %>
-
+      </tbody>
+    </table>
   </div>
 <% end %>

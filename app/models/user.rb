@@ -39,4 +39,31 @@ class User < ApplicationRecord
     # Si aun esta bajo el limite de 10 stocks y ya no estaba siguiendo ese ticker: da TRUE
     under_stock_limit? && !stock_already_tracked?(ticker_symbol)
   end
+
+  def self.search(entry)
+    # Aqui utilizamos el metodo de clase "User.where(...)" simplemente como "where()", pues al 
+    # estar aqui en el Users Controller, la clase "User" está implícita.-
+    #
+    # A su vez, anteponemos "self" en la declaracion de la funcion para que nuestro metodo "search()" 
+    # tambien sea un metodo de clase (es decir utilitario) y se pueda invocar desde cualquier lugar
+    # de la app como "User.search(...)"
+    #
+    # Funcionamiento:
+    #
+    # Hago las tres queries a la BD (por nombre, apellido y mail) utilzando like por lo cual pueden venir
+    # multiples resultados en cada una, y a su vez estar duplicados, por ejemplo se busca un nombre que
+    # es el apellido de alguien y a su vez es parte de su direccion de correo electronico.-
+    #
+    # Para ello, concateno las tres busquedas y al resultado le aplico el metodo "uniq" de Rails para 
+    # eliminar duplicados del mismo.-
+    #
+    entry.strip!  # Elimina espacios alrededor del string de busqueda
+
+    matches = ( 
+      where( "first_name like ?", "%#{entry}%" ) +
+      where( "last_name  like ?", "%#{entry}%" ) +
+      where( "email      like ?", "%#{entry}%" )
+    ).uniq
+  end
+
 end
