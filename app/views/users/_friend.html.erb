@@ -4,7 +4,7 @@
   <%= render 'layouts/messages' %>
 </div>
 
-<% if !@friends.empty? %>
+<% if @friends && !@friends.empty? %>
   <div class="card bg-light mb-3 card-body results-block">
     <table class="col-md-12">
       <tbody>
@@ -13,8 +13,15 @@
           <tr>
             <td><strong>Name: </strong> <%= friend.full_name %></td>
             <td><strong>Email: </strong> <%= friend.email %></td>
-            <td><strong>Actions: </strong> <%= link_to 'View Profile', '#', class: "btn btn-sm btn-success" %></td>
-            <td><%= link_to 'Follow', '#', class: "btn btn-sm btn-success", method: :post %></td>
+            <td>
+              <strong>Actions: </strong> 
+              <%= link_to 'View Profile', '#', class: "btn btn-sm btn-success" %>
+              <% if !current_user.friends.include?(friend) %>
+                <%= link_to 'Follow', friendships_path(id: friend), class: "btn btn-sm btn-success", method: :post %>
+              <% else %>
+                <span class="btn btn-secondary badge">You are already friends</span>
+              <% end %>
+            </td>
           </tr>
         <% end %>
 
