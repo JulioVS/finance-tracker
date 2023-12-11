@@ -15,7 +15,7 @@
             <td><strong>Email: </strong> <%= friend.email %></td>
             <td>
               <strong>Actions: </strong> 
-              <%= link_to 'View Profile', '#', class: "btn btn-sm btn-success" %>
+              <%= link_to 'View Profile', user_path(friend), class: "btn btn-sm btn-success" %>
               <% if !current_user.friends.include?(friend) %>
                 <%= link_to 'Follow', friendships_path(id: friend), class: "btn btn-sm btn-success", method: :post %>
               <% else %>
