@@ -4,17 +4,11 @@ class Stock < ApplicationRecord
 
   validates :name, :ticker, presence: true 
 
-  # Version 'fake' del metodo 'new_lookup', sin el servicio IEX CLoud.
-  # Simplemente reciclo los stocks que llegué a obtener y cargar en la BD.-
+  # ATENCION!!! 
+  #   Este metodo requiere de una subscripcion activa al servicio de IEX CLOUD para funcionar
+  #   correctamente y obtener cotizaciones reales y actuales de stocks.-
   #
   def self.new_lookup(ticker_symbol) 
-    find_by(ticker: ticker_symbol)   
-  end
-
-  # Version real del metodo 'new_lookup'. 
-  # Como se me vencio el trial de IEX Cloud, no lo puedo seguir usando.- 
-  #
-  def self.new_lookup_IEX_SERVICE_(ticker_symbol) 
     # Recupero las credenciales de mi servicio IEX Cloud desde el YAML de credenciales
     # del proyecto Rails (donde las tengo almacenadas de forma segura bajo el item "iex_client").-
     # Me devuelve un hash con los tokens publico y privado y el link de endpoint que luego
@@ -57,7 +51,13 @@ class Stock < ApplicationRecord
       # En caso de que la llamada a "quote()" haya devuelto error, aqui interceptamos la excepción para
       # que no se propague hacia arriba y simplemente devolvemos 'nil' como resultado final
       #
-      return nil
+      # return nil
+
+      # *** PARCHE SIN EL SERVICIO DE IEX CLOUD ***
+      #
+      # Como se me venció el trial de 7 dias, pongo este parche que lo que hace es buscar el Stock
+      # dentro de los que ya tenia cargados en le base de datos, y si no devuelve nulo.-
+      find_by(ticker: ticker_symbol)
     end
   end
 
